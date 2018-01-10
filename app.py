@@ -33,7 +33,7 @@ def get_ip_from_disk(ip):
     return disk_ip
 
 def notify_user(ip):
-    msg="this is a dummy tweet of ip: %s. " % ip
+    msg="Current public ip: %s. " % ip
     print msg
     #notify.send_tweet(msg)
 
