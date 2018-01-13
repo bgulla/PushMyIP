@@ -1,7 +1,9 @@
 FROM python:2.7.14-alpine3.7
 MAINTAINER Brandon Gulla im@brandongulla.com
-
-COPY . /src
+RUN mkdir /src
+COPY app.py /src
+COPY notify.py /src
+COPY requirements.txt /src
 WORKDIR "/src"
 RUN pip install -r requirements.txt
 CMD ["python","app.py"]

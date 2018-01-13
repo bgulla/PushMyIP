@@ -1,4 +1,5 @@
 import tweepy, sys,os
+from pushbullet import Pushbullet
 
 consumer_key = ""
 consumer_secret = ""
@@ -11,10 +12,15 @@ def tweet(msg, ):
     access_token = os.environ.get('twitter_access_token')
     access_token_secret = os.environ.get('twitter_token_secret')
     notify_host = os.environ.get('HOST', 'defaulthost')
-    if all(v is not None for v in [A, B, C, D, E]):
-        print
-    else:
-        fail
+
+
+def pushb(msg):
+    pushbullet_key = os.environ.get("PUSHBULLET_KEY").replace('"','')
+    pb = Pushbullet(pushbullet_key)
+    msg = "[%s] %s" % (os.environ.get('HOST', 'defaulthost'), msg)
+    pb.push_note("PushMyIP", msg)
+
+
 
 def send_tweet(msg, consumer_key, consumer_secret, access_token, access_token_secret):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)

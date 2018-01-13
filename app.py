@@ -4,7 +4,7 @@ import requests
 import time
 import os
 import notify
-
+import sys
 
 #current_ip = ""
 IP_FILE="ip.txt"
@@ -33,13 +33,20 @@ def get_ip_from_disk(ip):
     return disk_ip
 
 def notify_user(ip):
-    msg="Current public ip: %s. " % ip
+    msg="Current public ip: %s " % ip
     print msg
-    #notify.send_tweet(msg)
+    notify.pushb(msg)
+
 
 
 def run():
     current_ip="0.0.0.0"
+
+    print "=================="
+    print "ENV:"
+    print "\tPUSHBULLET_KEY= %s" % os.environ.get("PUSHBULLET_KEY")
+    print "\t%s" % (str(sys.argv))
+    print "=================="
     while True:
         public_ip = get_public_ip()
         if not public_ip == current_ip:
